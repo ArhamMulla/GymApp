@@ -100,10 +100,9 @@ void Member::updateProfile() {
         std::cout << "1. Update Age\n";
         std::cout << "2. Update Height\n";
         std::cout << "3. Update Weight\n";
-        std::cout << "4. Update Gender\n";
-        std::cout << "5. Update Goal\n";
-        std::cout << "6. Update Membership Type\n";
-        std::cout << "7. Return to Main Menu\n";
+        std::cout << "4. Update Goal\n";
+        std::cout << "5. Update Membership Type\n";
+        std::cout << "6. Return to Main Menu\n";
         std::cout << "Choose an option: ";
 
         int choice;
@@ -132,23 +131,18 @@ void Member::updateProfile() {
             break;
         }
         case 4: {
-            std::cout << "Enter new gender: ";
-            std::getline(std::cin, gender);
-            break;
-        }
-        case 5: {
             std::cout << "Enter new goal: ";
             std::getline(std::cin, goal);
             break;
         }
-        case 6: {
+        case 5: {
             std::cout << "Enter new membership type (gold/silver/bronze): ";
             std::getline(std::cin, membershipType);
             // Update end date based on new membership type
             endDate = calculateEndDate(startDate, membershipType);
             break;
         }
-        case 7: {
+        case 6: {
             // Save updated profile to members.csv
             std::vector<std::vector<std::string>> members = FileHandler::readCSV("data/members.csv");
             for (auto& row : members) {
