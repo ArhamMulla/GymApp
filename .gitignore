@@ -1,0 +1,43 @@
+# Build Folders and Compiled Files
+x64/
+x86/
+Debug/
+Release/
+*.obj
+*.log
+*.ilk
+*.pdb
+*.ipch
+*.tmp
+*.tlog
+*.lastbuildstate
+
+# Visual Studio Specific
+.vscode/
+.vs/
+*.VC.db
+*.VC.VC.opendb
+
+# User-specific Files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+Makefile
+
+# Executables and Libraries
+*.exe
+*.dll
+*.lib
+*.o
+*.idb
+*.sdf
+*.bak
+*.swp
+ 
