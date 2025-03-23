@@ -5,6 +5,8 @@
 #include "BMIUtility.h"
 #include "WorkoutPlan.h"
 #include "ProgressTracker.h"
+#include <string>
+#include <ctime> // For date handling
 
 class Member : public User {
 private:
@@ -17,16 +19,18 @@ private:
     std::string startDate;
     std::string endDate;
 
+    // Helper method to calculate end date
+    std::string calculateEndDate(const std::string& startDate, const std::string& membershipType);
+
 public:
     Member(const std::string& username, const std::string& password, int age, double height, double weight,
-        const std::string& gender, const std::string& goal, const std::string& membershipType,
-        const std::string& startDate, const std::string& endDate);
+        const std::string& gender, const std::string& goal, const std::string& membershipType);
 
     void displayMenu() override;
     void viewBMI() const;
     void viewWorkoutPlan() const;
     void viewMembershipDetails() const;
-    void trackProgress() const;
+    void trackProgress();
 
     // Getter for height
     double getHeight() const;

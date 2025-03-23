@@ -38,6 +38,11 @@ void GymManager::registerUser() {
     std::cout << "Register as (member/trainer/admin): ";
     std::getline(std::cin, role);
 
+    if (role != "member" && role != "trainer" && role != "admin") {
+        std::cout << "Invalid role. Please try again.\n";
+        return;
+    }
+
     std::string username, password;
     std::cout << "Enter username: ";
     std::getline(std::cin, username);
@@ -73,8 +78,17 @@ void GymManager::registerUser() {
         std::cout << "Enter membership type (gold/silver/bronze): ";
         std::getline(std::cin, membershipType);
 
+        if (membershipType != "gold" && membershipType != "silver" && membershipType != "bronze") {
+            std::cout << "Invalid membership type. Please try again.\n";
+            return;
+        }
+
+        // Create a Member object
+        Member member(username, password, age, heightM, weight, gender, goal, membershipType);
+
+        // Save member data to CSV
         std::vector<std::string> row = { username, password, std::to_string(age), std::to_string(heightM),
-                                        std::to_string(weight), gender, goal, membershipType };
+                                    std::to_string(weight), gender, goal, membershipType };
         FileHandler::appendCSV("data/members.csv", row);
         std::cout << "Member registered successfully!\n";
     }
@@ -119,7 +133,7 @@ void GymManager::loginUser() {
             std::cout << "Login successful!\n";
             if (role == "member") {
                 Member member(row[0], row[1], std::stoi(row[2]), std::stod(row[3]), std::stod(row[4]),
-                    row[5], row[6], row[7], "2023-01-01", "2023-12-31"); // Example dates
+                    row[5], row[6], row[7]);
                 memberMenu(member);
             }
             else if (role == "trainer") {
@@ -135,7 +149,6 @@ void GymManager::loginUser() {
     }
     std::cout << "Invalid username or password.\n";
 }
-
 void GymManager::memberMenu(Member& member) {
     while (true) {
         member.displayMenu();
@@ -232,6 +245,12 @@ void GymManager::adminMenu(Admin& admin) {
             admin.viewGymStatistics();
             break;
         case 6:
+            admin.viewMembers(); // New option
+            break;
+        case 7:
+            admin.viewTrainers(); // New option
+            break;
+        case 8:
             std::cout << "Logging out...\n";
             return;
         default:

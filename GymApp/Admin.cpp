@@ -1,7 +1,7 @@
 #include "Admin.h"
-#include <iostream>
-#include <limits>
+#include "FileHandler.h"
 #include "BMIUtility.h"
+#include <iostream>
 
 Admin::Admin(const std::string& username, const std::string& password)
     : User(username, password, "admin") {
@@ -14,7 +14,9 @@ void Admin::displayMenu() {
     std::cout << "3. View Member Payment Status\n";
     std::cout << "4. Assign Trainer to Member\n";
     std::cout << "5. View Gym Statistics\n";
-    std::cout << "6. Logout\n";
+    std::cout << "6. View Members\n"; // New option
+    std::cout << "7. View Trainers\n"; // New option
+    std::cout << "8. Logout\n";
 }
 
 void Admin::addTrainer() {
@@ -115,28 +117,23 @@ void Admin::assignTrainerToMember() {
 
 void Admin::viewGymStatistics() {
     auto members = FileHandler::readCSV("data/members.csv");
-    int totalMembers = members.size();
+    int totalMembers = members.size() - 1; // Exclude header
     int underweight = 0, normal = 0, overweight = 0, obese = 0;
     double totalBMI = 0.0;
 
-    for (const auto& row : members) {
-        try {
-            double height = std::stod(row[3]); // Height in meters
-            double weight = std::stod(row[4]); // Weight in kg
-            double bmi = BMIUtility::calculateBMI(weight, height);
-            totalBMI += bmi;
+    for (size_t i = 1; i < members.size(); ++i) { // Skip header
+        double height = std::stod(members[i][3]);
+        double weight = std::stod(members[i][4]);
+        double bmi = BMIUtility::calculateBMI(weight, height);
+        totalBMI += bmi;
 
-            if (bmi < 18.5) underweight++;
-            else if (bmi < 24.9) normal++;
-            else if (bmi < 29.9) overweight++;
-            else obese++;
-        }
-        catch (const std::exception& e) {
-            std::cerr << "Error parsing member data: " << e.what() << "\n";
-        }
+        if (bmi < 18.5) underweight++;
+        else if (bmi < 24.9) normal++;
+        else if (bmi < 29.9) overweight++;
+        else obese++;
     }
 
-    double averageBMI = (totalMembers > 0) ? (totalBMI / totalMembers) : 0.0;
+    double averageBMI = totalBMI / totalMembers;
 
     std::cout << "\nGym Statistics:\n";
     std::cout << "Total Members: " << totalMembers << "\n";
@@ -145,4 +142,26 @@ void Admin::viewGymStatistics() {
     std::cout << "Overweight Members: " << overweight << "\n";
     std::cout << "Obese Members: " << obese << "\n";
     std::cout << "Average BMI: " << averageBMI << "\n";
+}
+
+// New method: View members (display names only)
+void Admin::viewMembers() const {
+    auto members = FileHandler::readCSV("data/members.csv");
+    std::cout << "\nMembers:\n";
+    for (const auto& row : members) {
+        if (!row.empty()) {
+            std::cout << "Username: " << row[0] << "\n";
+        }
+    }
+}
+
+// New method: View trainers (display names only)
+void Admin::viewTrainers() const {
+    auto trainers = FileHandler::readCSV("data/trainers.csv");
+    std::cout << "\nTrainers:\n";
+    for (const auto& row : trainers) {
+        if (!row.empty()) {
+            std::cout << "Username: " << row[0] << "\n";
+        }
+    }
 }

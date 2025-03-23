@@ -67,10 +67,21 @@ void Trainer::assignWorkoutPlan() const {
         return;
     }
 
-    // Assign the member to the trainer
-    std::vector<std::string> row = { memberUsername, username };
-    FileHandler::appendCSV("data/assignments.csv", row);
-    std::cout << "Member assigned to you successfully!\n";
+    // Ask for workout plan details
+    std::string exercise, sets, reps, description;
+    std::cout << "Enter exercise: ";
+    std::getline(std::cin, exercise);
+    std::cout << "Enter number of sets: ";
+    std::getline(std::cin, sets);
+    std::cout << "Enter number of reps: ";
+    std::getline(std::cin, reps);
+    std::cout << "Enter description: ";
+    std::getline(std::cin, description);
+
+    // Save the workout plan to workout_plans.csv
+    std::vector<std::string> row = { memberUsername, exercise, sets, reps, description };
+    FileHandler::appendCSV("data/workout_plans.csv", row);
+    std::cout << "Workout plan assigned to " << memberUsername << " successfully!\n";
 }
 
 void Trainer::viewProgressReports() const {

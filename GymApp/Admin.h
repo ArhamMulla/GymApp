@@ -2,8 +2,6 @@
 #define ADMIN_H
 
 #include "User.h"
-#include "FileHandler.h"
-#include <vector>
 #include <string>
 
 class Admin : public User {
@@ -16,6 +14,10 @@ public:
     void viewMemberPaymentStatus();
     void assignTrainerToMember();
     void viewGymStatistics();
+
+    // New methods
+    void viewMembers() const;
+    void viewTrainers() const;
 };
 
 #endif // ADMIN_H
