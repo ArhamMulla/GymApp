@@ -31,6 +31,8 @@ public:
     void viewWorkoutPlan() const;
     void viewMembershipDetails() const;
     void trackProgress();
+    void updateProfile();
+    void viewProfile() const; // New method
 
     // Getter for height
     double getHeight() const;

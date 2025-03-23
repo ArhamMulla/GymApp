@@ -167,20 +167,16 @@ void GymManager::memberMenu(Member& member) {
         case 3:
             member.viewMembershipDetails();
             break;
-        case 4: {
-            double weight;
-            std::string achievement;
-            std::cout << "Enter current weight (in kg): ";
-            std::cin >> weight;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
-            std::cout << "Enter achievement: ";
-            std::getline(std::cin, achievement);
-
-            double bmi = BMIUtility::calculateBMI(weight, member.getHeight()); // Correct usage
-            ProgressTracker::addProgressEntry(member.getUsername(), weight, bmi, achievement);
+        case 4:
+            member.trackProgress();
             break;
-        }
         case 5:
+            member.updateProfile();
+            break;
+        case 6:
+            member.viewProfile(); // New option
+            break;
+        case 7:
             std::cout << "Logging out...\n";
             return;
         default:
