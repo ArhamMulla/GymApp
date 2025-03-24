@@ -14,9 +14,10 @@ void Admin::displayMenu() {
     std::cout << "3. View Member Payment Status\n";
     std::cout << "4. Assign Trainer to Member\n";
     std::cout << "5. View Gym Statistics\n";
-    std::cout << "6. View Members\n"; // New option
-    std::cout << "7. View Trainers\n"; // New option
-    std::cout << "8. Logout\n";
+    std::cout << "6. View Members\n"; 
+    std::cout << "7. View Trainers\n"; 
+    std::cout << "8. Reset All Data\n"; 
+    std::cout << "9. Logout\n";
 }
 
 void Admin::addTrainer() {
@@ -164,4 +165,24 @@ void Admin::viewTrainers() const {
             std::cout << "Username: " << row[0] << "\n";
         }
     }
+}
+
+void Admin::resetAllData() {
+    // Define headers for all CSV files
+    std::vector<std::vector<std::string>> membersHeader = { {"username","password","age","height","weight","gender","goal","membershipType","startDate","endDate"} };
+    std::vector<std::vector<std::string>> trainersHeader = { {"username","password","age","gender","experience"} };
+    std::vector<std::vector<std::string>> adminsHeader = { {"username","password"} };
+    std::vector<std::vector<std::string>> assignmentsHeader = { {"memberUsername","trainerUsername"} };
+    std::vector<std::vector<std::string>> workoutPlansHeader = { {"memberUsername","exercise","sets","reps","description"} };
+    std::vector<std::vector<std::string>> progressHeader = { {"memberUsername","weight","bmi","achievement"} };
+
+    // Reset files
+    FileHandler::writeCSV("data/members.csv", membersHeader);
+    FileHandler::writeCSV("data/trainers.csv", trainersHeader);
+    FileHandler::writeCSV("data/admins.csv", adminsHeader);
+    FileHandler::writeCSV("data/assignments.csv", assignmentsHeader);
+    FileHandler::writeCSV("data/workout_plans.csv", workoutPlansHeader);
+    FileHandler::writeCSV("data/progress.csv", progressHeader);
+
+    std::cout << "All data reset successfully!\n";
 }

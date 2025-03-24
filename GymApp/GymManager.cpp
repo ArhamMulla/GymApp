@@ -46,6 +46,13 @@ void GymManager::registerUser() {
     std::string username, password;
     std::cout << "Enter username: ";
     std::getline(std::cin, username);
+    if (FileHandler::usernameExists(username, "data/members.csv") ||
+        FileHandler::usernameExists(username, "data/trainers.csv") ||
+        FileHandler::usernameExists(username, "data/admins.csv")) {
+        std::cout << "Error: Username already exists. Choose a different username.\n";
+        return;
+    }
+
     std::cout << "Enter password: ";
     std::getline(std::cin, password);
 
@@ -241,12 +248,15 @@ void GymManager::adminMenu(Admin& admin) {
             admin.viewGymStatistics();
             break;
         case 6:
-            admin.viewMembers(); // New option
+            admin.viewMembers(); 
             break;
         case 7:
-            admin.viewTrainers(); // New option
+            admin.viewTrainers(); 
             break;
         case 8:
+            Admin::resetAllData(); // Call reset
+            break;
+        case 9:
             std::cout << "Logging out...\n";
             return;
         default:

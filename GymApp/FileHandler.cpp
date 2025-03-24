@@ -53,3 +53,13 @@ void FileHandler::appendCSV(const std::string& filename, const std::vector<std::
     }
     file << "\n";
 }
+
+bool FileHandler::usernameExists(const std::string& username, const std::string& filename) {
+    auto data = readCSV(filename);
+    for (const auto& row : data) {
+        if (!row.empty() && row[0] == username) {
+            return true;
+        }
+    }
+    return false;
+}

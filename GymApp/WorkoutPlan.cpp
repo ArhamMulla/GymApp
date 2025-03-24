@@ -20,15 +20,21 @@ void WorkoutPlan::generateWorkoutPlan(const std::string& memberUsername) {
 
 void WorkoutPlan::viewWorkoutPlan(const std::string& memberUsername) {
     auto data = FileHandler::readCSV("data/workout_plans.csv");
+    bool found = false;
+
+    std::cout << "\nAssigned Workouts for " << memberUsername << ":\n";
     for (const auto& row : data) {
-        if (row[0] == memberUsername) {
-            std::cout << "\nWorkout Plan:\n";
+        if (row.size() >= 5 && row[0] == memberUsername) {
+            std::cout << "-----------------------------\n";
             std::cout << "Exercise: " << row[1] << "\n";
             std::cout << "Sets: " << row[2] << "\n";
             std::cout << "Reps: " << row[3] << "\n";
             std::cout << "Description: " << row[4] << "\n";
-            return;
+            found = true;
         }
     }
-    std::cout << "No workout plan found for " << memberUsername << ".\n";
+
+    if (!found) {
+        std::cout << "No workouts assigned yet.\n";
+    }
 }

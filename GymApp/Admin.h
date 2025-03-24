@@ -18,6 +18,7 @@ public:
     // New methods
     void viewMembers() const;
     void viewTrainers() const;
+    static void resetAllData();
 };
 
 #endif // ADMIN_H
