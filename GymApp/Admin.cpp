@@ -2,6 +2,7 @@
 #include "FileHandler.h"
 #include "BMIUtility.h"
 #include <iostream>
+#include <iomanip>
 
 Admin::Admin(const std::string& username, const std::string& password)
     : User(username, password, "admin") {
@@ -72,9 +73,20 @@ void Admin::removeTrainer() {
 
 void Admin::viewMemberPaymentStatus() {
     auto data = FileHandler::readCSV("data/members.csv");
+
+    if (data.empty()) {
+        std::cout << "\nNo member data found.\n";
+        return;
+    }
+
     std::cout << "\nMember Payment Status:\n";
-    for (const auto& row : data) {
-        std::cout << "Username: " << row[0] << ", Membership Type: " << row[7] << "\n";
+
+    for (size_t i = 1; i < data.size(); ++i) {
+        const auto& row = data[i];
+        if (row.size() >= 8) {
+            std::cout << "Username: " << std::setw(15) << std::left << row[0]
+                << " | Membership: " << std::setw(10) << row[7] << "\n";
+        }
     }
 }
 
@@ -145,27 +157,43 @@ void Admin::viewGymStatistics() {
     std::cout << "Average BMI: " << averageBMI << "\n";
 }
 
-// New method: View members (display names only)
 void Admin::viewMembers() const {
     auto members = FileHandler::readCSV("data/members.csv");
     std::cout << "\nMembers:\n";
-    for (const auto& row : members) {
-        if (!row.empty()) {
-            std::cout << row[0] << "\n";
+
+    // Skip the first row (header) if there are multiple rows
+    if (members.size() > 1) {
+        for (size_t i = 1; i < members.size(); ++i) {
+            const auto& row = members[i];
+            if (!row.empty()) {
+                std::cout << "Username: " << row[0]
+                    << " | Age: " << row[2]
+                << " | Gender: " << row[5] << "\n";
+            }
         }
+    }
+    else {
+        std::cout << "No members found.\n";
     }
 }
 
-// New method: View trainers (display names only)
 void Admin::viewTrainers() const {
     auto trainers = FileHandler::readCSV("data/trainers.csv");
     std::cout << "\nTrainers:\n";
-    for (const auto& row : trainers) {
-        if (row.size() >= 5) { // Check all fields exist
-            std::cout << "Username: " << row[0]
-                << " | Experience: " << row[4] << " years"
-                << " | Gender: " << row[3] << "\n";
+
+    // Skip the first row (header) if there are multiple rows
+    if (trainers.size() > 1) {
+        for (size_t i = 1; i < trainers.size(); ++i) {
+            const auto& row = trainers[i];
+            if (row.size() >= 5) { // Check all fields exist
+                std::cout << "Username: " << row[0]
+                    << " | Experience: " << row[4] << " years"
+                    << " | Gender: " << row[3] << "\n";
+            }
         }
+    }
+    else {
+        std::cout << "No trainers found.\n";
     }
 }
 
