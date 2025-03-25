@@ -4,7 +4,8 @@
 #include "Admin.h"
 #include "FileHandler.h"
 #include <iostream>
-#include <limits> // For std::numeric_limits
+#include <limits> 
+#include <conio.h>
 
 void GymManager::start() {
     while (true) {
@@ -54,7 +55,7 @@ void GymManager::registerUser() {
     }
 
     std::cout << "Enter password: ";
-    std::getline(std::cin, password);
+    password = getPasswordInput();
 
     if (role == "member") {
         int age;
@@ -138,7 +139,7 @@ void GymManager::loginUser() {
     std::cout << "Enter username: ";
     std::getline(std::cin, username);
     std::cout << "Enter password: ";
-    std::getline(std::cin, password);
+    password = getPasswordInput();
 
     std::vector<std::vector<std::string>> data;
     if (role == "member") {
@@ -283,4 +284,24 @@ void GymManager::adminMenu(Admin& admin) {
             std::cout << "Invalid choice. Try again.\n";
         }
     }
+}
+
+std::string GymManager::getPasswordInput() {
+    std::string password;
+    char ch;
+
+    while ((ch = _getch()) != '\r') { // '\r' is the Enter key
+        if (ch == '\b') { // Handle backspace
+            if (!password.empty()) {
+                std::cout << "\b \b"; // Move cursor back, overwrite with space, move back again
+                password.pop_back();
+            }
+        }
+        else {
+            std::cout << '*';
+            password.push_back(ch);
+        }
+    }
+    std::cout << std::endl;
+    return password;
 }

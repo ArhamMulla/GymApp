@@ -20,6 +20,7 @@ private:
     void memberMenu(Member& member);   // Menu for members
     void trainerMenu(Trainer& trainer); // Menu for trainers
     void adminMenu(Admin& admin);      // Menu for admins
+    std::string getPasswordInput();
 };
 
 #endif // GYMMANAGER_H
