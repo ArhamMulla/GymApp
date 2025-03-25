@@ -99,7 +99,27 @@ void GymManager::registerUser() {
         FileHandler::appendCSV("data/members.csv", row);
         std::cout << "Member registered successfully!\n";
     }
-    else if (role == "trainer" || role == "admin") {
+    else if (role == "trainer") {
+        int age, experience;
+        std::string gender;
+
+        // Get trainer-specific details
+        std::cout << "Enter age: ";
+        std::cin >> age;
+        std::cin.ignore();
+
+        std::cout << "Enter gender: ";
+        std::getline(std::cin, gender);
+
+        std::cout << "Enter years of experience: ";
+        std::cin >> experience;
+        std::cin.ignore();
+
+        // Save to CSV (add experience and gender)
+        std::vector<std::string> row = { username, password, std::to_string(age), gender, std::to_string(experience) };
+        FileHandler::appendCSV("data/trainers.csv", row);
+    }
+    else if (role == "admin") {
         std::vector<std::string> row = { username, password, role };
         FileHandler::appendCSV((role == "trainer") ? "data/trainers.csv" : "data/admins.csv", row);
         std::cout << role << " registered successfully!\n";

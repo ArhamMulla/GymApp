@@ -151,7 +151,7 @@ void Admin::viewMembers() const {
     std::cout << "\nMembers:\n";
     for (const auto& row : members) {
         if (!row.empty()) {
-            std::cout << "Username: " << row[0] << "\n";
+            std::cout << row[0] << "\n";
         }
     }
 }
@@ -161,8 +161,10 @@ void Admin::viewTrainers() const {
     auto trainers = FileHandler::readCSV("data/trainers.csv");
     std::cout << "\nTrainers:\n";
     for (const auto& row : trainers) {
-        if (!row.empty()) {
-            std::cout << "Username: " << row[0] << "\n";
+        if (row.size() >= 5) { // Check all fields exist
+            std::cout << "Username: " << row[0]
+                << " | Experience: " << row[4] << " years"
+                << " | Gender: " << row[3] << "\n";
         }
     }
 }
