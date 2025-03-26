@@ -1,5 +1,4 @@
-#ifndef TRAINER_H
-#define TRAINER_H
+#pragma once
 
 #include "User.h"
 #include <string>
@@ -18,5 +17,3 @@ public:
     void assignWorkoutPlan() const;
     void viewProgressReports() const;
 };
-
-#endif // TRAINER_H

@@ -1,7 +1,4 @@
 #pragma once
-#ifndef USER_H
-#define USER_H
-
 #include <string>
 #include <vector>
 
@@ -21,5 +18,3 @@ public:
     virtual void displayMenu() = 0; // Pure virtual function
     bool login(const std::string& inputUsername, const std::string& inputPassword);
 };
-
-#endif // USER_H

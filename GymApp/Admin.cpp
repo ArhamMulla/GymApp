@@ -2,7 +2,6 @@
 #include "FileHandler.h"
 #include "BMIUtility.h"
 #include <iostream>
-#include <iomanip>
 
 Admin::Admin(const std::string& username, const std::string& password)
     : User(username, password, "admin") {
@@ -84,8 +83,8 @@ void Admin::viewMemberPaymentStatus() {
     for (size_t i = 1; i < data.size(); ++i) {
         const auto& row = data[i];
         if (row.size() >= 8) {
-            std::cout << "Username: " << std::setw(15) << std::left << row[0]
-                << " | Membership: " << std::setw(10) << row[7] << "\n";
+            std::cout << "Username: "  << row[0]
+                << " | Membership: " << row[7] << "\n";
         }
     }
 }
@@ -161,7 +160,6 @@ void Admin::viewMembers() const {
     auto members = FileHandler::readCSV("data/members.csv");
     std::cout << "\nMembers:\n";
 
-    // Skip the first row (header) if there are multiple rows
     if (members.size() > 1) {
         for (size_t i = 1; i < members.size(); ++i) {
             const auto& row = members[i];
@@ -181,7 +179,6 @@ void Admin::viewTrainers() const {
     auto trainers = FileHandler::readCSV("data/trainers.csv");
     std::cout << "\nTrainers:\n";
 
-    // Skip the first row (header) if there are multiple rows
     if (trainers.size() > 1) {
         for (size_t i = 1; i < trainers.size(); ++i) {
             const auto& row = trainers[i];

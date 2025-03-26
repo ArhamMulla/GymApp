@@ -1,5 +1,4 @@
-#ifndef ADMIN_H
-#define ADMIN_H
+#pragma once
 
 #include "User.h"
 #include <string>
@@ -14,11 +13,7 @@ public:
     void viewMemberPaymentStatus();
     void assignTrainerToMember();
     void viewGymStatistics();
-
-    // New methods
     void viewMembers() const;
     void viewTrainers() const;
     static void resetAllData();
 };
-
-#endif // ADMIN_H

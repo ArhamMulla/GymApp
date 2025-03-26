@@ -1,6 +1,4 @@
 #pragma once
-#ifndef FILEHANDLER_H
-#define FILEHANDLER_H
 
 #include <vector>
 #include <string>
@@ -12,5 +10,3 @@ public:
     static void appendCSV(const std::string& filename, const std::vector<std::string>& row);
     static bool usernameExists(const std::string& username, const std::string& filename);
 };
-
-#endif // FILEHANDLER_H

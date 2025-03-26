@@ -1,6 +1,7 @@
 #include "Trainer.h"
 #include "FileHandler.h"
 #include "ProgressTracker.h"
+#include "BMIUtility.h"
 #include <iostream>
 
 Trainer::Trainer(const std::string& username, const std::string& password, int age, const std::string& gender, int experience)
@@ -34,6 +35,12 @@ void Trainer::viewAssignedMembers() const {
                     std::cout << "Gender: " << member[5] << "\n";
                     std::cout << "Goal: " << member[6] << "\n";
                     std::cout << "Membership Type: " << member[7] << "\n";
+                    double weight = std::stod(member[4]);
+                    double height = std::stod(member[3]);
+                    double bmi = BMIUtility::calculateBMI(weight, height);
+                    std::string category = BMIUtility::getBMICategory(bmi);
+                    std::cout << "BMI: " << bmi << " (" << category << ")\n";
+
                     std::cout << "-------------------------\n";
                     found = true;
                     break;

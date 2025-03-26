@@ -1,12 +1,10 @@
-#ifndef MEMBER_H
-#define MEMBER_H
+#pragma once
 
 #include "User.h"
 #include "BMIUtility.h"
 #include "WorkoutPlan.h"
 #include "ProgressTracker.h"
 #include <string>
-#include <ctime> // For date handling
 
 class Member : public User {
 private:
@@ -37,5 +35,3 @@ public:
     // Getter for height
     double getHeight() const;
 };
-
-#endif // MEMBER_H

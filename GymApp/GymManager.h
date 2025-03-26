@@ -1,12 +1,10 @@
-#ifndef GYMMANAGER_H
-#define GYMMANAGER_H
+#pragma once
 
 #include "User.h"
 #include "Member.h"
 #include "Trainer.h"
 #include "Admin.h"
 #include "FileHandler.h"
-#include <iostream>
 
 class GymManager {
 public:
@@ -22,5 +20,3 @@ private:
     void adminMenu(Admin& admin);      // Menu for admins
     std::string getPasswordInput();
 };
-
-#endif // GYMMANAGER_H
