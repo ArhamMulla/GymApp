@@ -56,8 +56,9 @@ void Member::displayMenu() {
     std::cout << "3. View Membership Details\n";
     std::cout << "4. Track Progress\n";
     std::cout << "5. Update Profile\n";
-    std::cout << "6. View Profile\n"; // New option
-    std::cout << "7. Logout\n";
+    std::cout << "6. View Profile\n"; 
+    std::cout << "7. View Progress\n";
+    std::cout << "8. Logout\n";
 }
 
 void Member::viewBMI() const {
@@ -186,3 +187,7 @@ void Member::viewProfile() const {
     std::cout << "End Date: " << endDate << "\n";
 }
 
+void Member::viewProgress() const {
+    // Member can only view their own progress
+    ProgressTracker::viewProgress(username);
+}

@@ -1,2 +1,4 @@
 username,password,age,height,weight,gender,goal,membershipType,startDate,endDate
 sara,1234,25,1.580000,45.000000,female,weight gain,bronze
+john,1234,30,1.750000,78.000000,male,weight loss,gold
+user1,1234,25,1.780000,75.000000,male,weight loss,gold

@@ -64,18 +64,18 @@ void GymManager::registerUser() {
 
         std::cout << "Enter age: ";
         std::cin >> age;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
 
         std::cout << "Enter height (in centimeters): ";
         std::cin >> heightCm;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
 
         // Convert height from centimeters to meters
         heightM = heightCm / 100.0;
 
         std::cout << "Enter weight (in kg): ";
         std::cin >> weight;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
 
         std::cout << "Enter gender: ";
         std::getline(std::cin, gender);
@@ -122,7 +122,7 @@ void GymManager::registerUser() {
     }
     else if (role == "admin") {
         std::vector<std::string> row = { username, password, role };
-        FileHandler::appendCSV((role == "trainer") ? "data/trainers.csv" : "data/admins.csv", row);
+        FileHandler::appendCSV("data/admins.csv", row);
         std::cout << role << " registered successfully!\n";
     }
     else {
@@ -202,9 +202,12 @@ void GymManager::memberMenu(Member& member) {
             member.updateProfile();
             break;
         case 6:
-            member.viewProfile(); // New option
+            member.viewProfile(); 
             break;
         case 7:
+            member.viewProgress();
+            break;
+        case 8:
             std::cout << "Logging out...\n";
             return;
         default:
@@ -250,7 +253,7 @@ void GymManager::adminMenu(Admin& admin) {
         std::cout << "Choose an option: ";
         int choice;
         std::cin >> choice;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
 
         switch (choice) {
         case 1:

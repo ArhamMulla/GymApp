@@ -30,7 +30,8 @@ public:
     void viewMembershipDetails() const;
     void trackProgress();
     void updateProfile();
-    void viewProfile() const; // New method
+    void viewProfile() const; 
+    void viewProgress() const;
 
     // Getter for height
     double getHeight() const;
